@@ -14,8 +14,15 @@ class TechnologySeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        //
+        $technology_data = ['Javascript', 'Phyton', 'PHP', 'C'];
+
+        foreach ($technology_data as $technology_name) {
+            $technology = new Technology();
+            $technology->label = $technology_name;
+            $technology->color = $faker->hexColor();
+            $technology->save();
+        }
     }
 }

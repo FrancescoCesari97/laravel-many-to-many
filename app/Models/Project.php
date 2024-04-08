@@ -11,6 +11,12 @@ class Project extends Model
 
     protected $fillable = ['type_id', 'title', 'content'];
 
+    // funzione per recuperare le tecnologie
+    public function technology()
+    {
+        return $this->belongsToMany(technology::class);
+    }
+
     // funzione per recuperare un tipo
     public function type()
     {
