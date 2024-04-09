@@ -29,4 +29,9 @@ class Project extends Model
         // se la lunghezza richiesta è maggiore della lunghezza totale non stampa i tre puntini alla fine
         return strlen($this->content) > $n_chars ? substr($this->content, 0, $n_chars) . '...' : $this->content;
     }
+
+    public function getTechnologyText()
+    {
+        return implode('- ', $this->technology->pluck('label')->toArray());
+    }
 }

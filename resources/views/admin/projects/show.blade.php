@@ -10,17 +10,27 @@
             <a class="btn btn-primary py-2" href="{{ route('admin.projects.edit', $project) }}">vai alla modifica</a>
             <h1 class=" text-center">{{ $project->title }}</h1>
 
-            <div class="row py-5">
+            <div class="row py-5 text-center">
 
-                <div class="col-9 justify-content-start ">
+                <div class="col-12  ">
                     <p class="fs-5  ">{{ $project->content }}</p>
 
                 </div>
 
             </div>
-            @foreach ($project->technology as $technology)
-                {{ $technology->label }}
-            @endforeach()
+            <div class="text-center">
+                {{-- @foreach ($project->technology as $technology)
+                    {{ $technology->label }} @unless ($loop->last)
+                        -
+                    @endunless
+                @endforeach() --}}
+
+                <p>
+
+                    {{ $project->getTechnologyText() }}
+                </p>
+
+            </div>
 
 
 

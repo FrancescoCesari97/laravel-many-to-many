@@ -26,6 +26,7 @@
                         <p>{{ $project->type->label }}</p>
                         <p>{{ $project->slug }}</p>
                         <p>{{ $project->getAbstract(200) }}</p>
+                        <p>{{ $project->getTechnologyText() }}</p>
 
                         <div class="d-flex justify-content-around">
 
