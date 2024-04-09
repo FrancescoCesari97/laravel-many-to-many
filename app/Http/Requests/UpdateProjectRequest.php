@@ -26,6 +26,7 @@ class UpdateProjectRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string|',
+            'type_id' => 'required',
         ];
     }
 
@@ -34,7 +35,7 @@ class UpdateProjectRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function massages()
+    public function messages()
     {
         return [
             'title.required' => 'Il titolo è obbligatorio',
@@ -43,6 +44,8 @@ class UpdateProjectRequest extends FormRequest
 
             'content.required' => 'Il contenuto è obbligatorio',
             'content.string' => 'Il contenuto  deve essere un valore testuale',
+
+            'type_id.required' => 'La categoria è obbligatoria',
         ];
     }
 }

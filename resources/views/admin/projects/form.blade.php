@@ -29,19 +29,22 @@
 
             </div>
 
-            <div class="col-4 ">
+            <div class="col-4">
                 <label class="form-label" for="type_id">Categoria</label>
-                <select class="form-select  @error('type_id') is-invalid @enderror" name="type_id" id="type_id">
+                <select class="form-select @error('type_id') is-invalid @enderror" name="type_id" id="type_id">
                     <option value="">seleziona una categoria</option>
-
                     @foreach ($types as $type)
                         <option value="{{ $type->id }}"
-                            {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>{{ $type->label }}
+                            {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>
+                            {{ $type->label }}
                         </option>
                     @endforeach
-
                 </select>
+                @error('type_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
+
 
 
             <div class="col-4 d-flex align-items-end">
