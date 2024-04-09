@@ -18,7 +18,7 @@
 
             @csrf
 
-            <div class="col-6">
+            <div class="col-4">
                 <label class="form-label" for="title">Titolo</label>
                 <input class="form-control @error('title') is-invalid @enderror" type="text" id="title" name="title"
                     value="{{ old('title') }}" {{-- required --}}>
@@ -29,7 +29,7 @@
 
             </div>
 
-            <div class="col-6 ">
+            <div class="col-4 ">
                 <label class="form-label" for="type_id">Categoria</label>
                 <select class="form-select" name="type_id" id="type_id">
                     <option value="">seleziona una categoria</option>
@@ -39,6 +39,23 @@
                     @endforeach
 
                 </select>
+            </div>
+
+
+            <div class="col-4 d-flex align-items-end">
+
+
+
+                @foreach ($technologies as $technology)
+                    <div class="px-3 ">
+                        <input id="technologies-{{ $technology->id }}" name="technologies[]" type="checkbox"
+                            value="{{ $technology->id }}" class="form-check-input">
+                        <label class="form-check-label"
+                            for="technologies-{{ $technology->id }}">{{ $technology->label }}</label>
+
+                    </div>
+                @endforeach
+
             </div>
 
 

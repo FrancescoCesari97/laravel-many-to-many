@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class ProjectController extends Controller
 {
@@ -34,7 +36,8 @@ class ProjectController extends Controller
     {
         $project = new Project();
         $types = Type::all();
-        return view('admin.projects.form', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.form', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -56,6 +59,12 @@ class ProjectController extends Controller
         $project->slug = Str::slug($project->title);
 
         $project->save();
+
+        if (array_key_exists('technologies', $data)) {
+            $project->technology()->attach($data['technologies']);
+        }
+
+        // $project->technology()->attach($data['technologies']);
 
         return redirect()->route('admin.projects.show', $project);
     }
@@ -80,7 +89,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.form', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.form', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -99,6 +109,12 @@ class ProjectController extends Controller
         $project->fill($data);
 
         $project->save();
+
+        if (Arr::exists($data, 'technologies')) {
+            $project->technology()->sync($data['technologies']);
+        } else {
+            $project->technology()->detach();
+        }
 
         return redirect()->route('admin.projects.show', $project);
     }
