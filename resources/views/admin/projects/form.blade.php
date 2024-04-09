@@ -21,21 +21,23 @@
             <div class="col-4">
                 <label class="form-label" for="title">Titolo</label>
                 <input class="form-control @error('title') is-invalid @enderror" type="text" id="title" name="title"
-                    value="{{ old('title') }}" {{-- required --}}>
+                    value="{{ old('title', $project->title) }}" {{-- required --}}>
 
-                {{-- @error('title')
+                @error('title')
                     <div class="invalid-feedback">{{ $message }}</div>
-                @enderror --}}
+                @enderror
 
             </div>
 
             <div class="col-4 ">
                 <label class="form-label" for="type_id">Categoria</label>
-                <select class="form-select" name="type_id" id="type_id">
+                <select class="form-select  @error('type_id') is-invalid @enderror" name="type_id" id="type_id">
                     <option value="">seleziona una categoria</option>
 
                     @foreach ($types as $type)
-                        <option value="{{ $type->id }}">{{ $type->label }}</option>
+                        <option value="{{ $type->id }}"
+                            {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>{{ $type->label }}
+                        </option>
                     @endforeach
 
                 </select>
@@ -48,7 +50,8 @@
 
                 @foreach ($technologies as $technology)
                     <div class="px-3 ">
-                        <input id="technologies-{{ $technology->id }}" name="technologies[]" type="checkbox"
+                        <input {{ $project->technology->contains($technology->id) ? 'checked' : '' }}
+                            id="technologies-{{ $technology->id }}" name="technologies[]" type="checkbox"
                             value="{{ $technology->id }}" class="form-check-input">
                         <label class="form-check-label"
                             for="technologies-{{ $technology->id }}">{{ $technology->label }}</label>
@@ -63,7 +66,7 @@
 
             <div class="col-12">
                 <label class="form-label" for="content">Contenuto</label>
-                <textarea class="form-control" name="content" id="content" rows="5">{{ old('content') }}</textarea>
+                <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content" rows="5">{{ old('content', $project->content) }}</textarea>
             </div>
 
 
