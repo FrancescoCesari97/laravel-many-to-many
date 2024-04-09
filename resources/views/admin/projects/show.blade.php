@@ -18,6 +18,9 @@
                 </div>
 
             </div>
+            @foreach ($project->technology as $technology)
+                {{ $technology->label }}
+            @endforeach()
 
 
 
