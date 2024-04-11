@@ -61,6 +61,11 @@
 
             </div>
 
+            <div class="col-12">
+                <label class="form-label" for="image">Immagine progetto</label>
+
+                <input class="form-control" id="image" name="image" type="file">
+            </div>
 
 
 
