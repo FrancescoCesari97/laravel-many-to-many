@@ -9,7 +9,8 @@
             {{ empty($project->id) ? 'Creazione' : 'Modifica' }} progetto
         </h2>
 
-        <form action="{{ empty($project->id) ? route('admin.projects.store') : route('admin.projects.update', $project) }}"
+        <form enctype="multipart/form-data"
+            action="{{ empty($project->id) ? route('admin.projects.store') : route('admin.projects.update', $project) }}"
             class="py-5 row g-5" method="POST">
 
             @if (!empty($project->id))

@@ -52,6 +52,8 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
+        dd($data);
+
         $project = new Project();
 
         $project->fill($data);
