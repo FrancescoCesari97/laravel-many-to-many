@@ -49,16 +49,13 @@
 
             <div class="col-4 d-flex align-items-end">
 
-
-
                 @foreach ($technologies as $technology)
                     <div class="px-3 ">
                         <input {{ $project->technology->contains($technology->id) ? 'checked' : '' }}
                             id="technologies-{{ $technology->id }}" name="technologies[]" type="checkbox"
                             value="{{ $technology->id }}" class="form-check-input">
-                        <label class="form-check-label"
-                            for="technologies-{{ $technology->id }}">{{ $technology->label }}</label>
-
+                        <label class="form-check-label" for="technologies-{{ $technology->id }}">{{ $technology->label }}
+                        </label>
                     </div>
                 @endforeach
 
@@ -79,8 +76,6 @@
             </div>
 
         </form>
-
-
 
 
     </div>

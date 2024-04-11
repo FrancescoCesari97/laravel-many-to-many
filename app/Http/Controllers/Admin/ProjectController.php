@@ -60,7 +60,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        if (array_key_exists('technologies', $data)) {
+        if (Arr::exists('technologies', $data)) {
             $project->technology()->attach($data['technologies']);
         }
 
