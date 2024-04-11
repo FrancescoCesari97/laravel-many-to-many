@@ -32,6 +32,10 @@
 
             </div>
 
+            @if (!empty($project->image))
+                <img src="{{ asset('storage/' . $project->image) }}" alt="">
+            @endif
+
 
 
         </div>
