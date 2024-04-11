@@ -54,7 +54,10 @@ class ProjectController extends Controller
         $data = $request->all();
 
         // dd($data['image']);
-        Storage::put('uploads/projects', $data['image']);
+        $img_path = Storage::put('uploads/projects', $data['image']);
+
+        // dd($img_path);
+        // \uploads\projects\7BVUWbAHvkqtKM34ZV0LDgvg5RmJigvzsCJqs8zj.jpg
 
         $project = new Project();
 
