@@ -11,6 +11,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 
@@ -52,7 +53,8 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
-        dd($data);
+        // dd($data['image']);
+        Storage::put('uploads/projects', $data['image']);
 
         $project = new Project();
 
@@ -62,7 +64,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        if (Arr::exists('technologies', $data)) {
+        if (Arr::exists($data, 'technologies')) {
             $project->technology()->attach($data['technologies']);
         }
 
