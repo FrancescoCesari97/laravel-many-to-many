@@ -69,9 +69,12 @@ class ProjectController extends Controller
         // dd($img_path);
         // \uploads\projects\7BVUWbAHvkqtKM34ZV0LDgvg5RmJigvzsCJqs8zj.jpg
 
-        // gestisto l'immagine e ne recupero il path
-        $img_path = Storage::put('uploads/projects', $data['image']);
-        $project->image = $img_path;
+        // gestisco l'immagine e ne recupero il path
+        // se è arrivata l'immagine
+        if (Arr::exists($data, 'image')) {
+            $img_path = Storage::put('uploads/projects', $data['image']);
+            $project->image = $img_path;
+        }
 
         // salvo il progetto in db
         $project->save();
@@ -124,6 +127,18 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $project->fill($data);
+
+        if (Arr::exists($data, 'image')) {
+            // se ce n'era una prima cancella la vecchia immagine
+
+            if (!empty($project->image)) {
+                Storage::delete($project->image);
+            }
+
+            // salva la nuova immagine
+            $img_path = Storage::put('uploads/projects', $data['image']);
+            $project->image = $img_path;
+        }
 
         $project->save();
 

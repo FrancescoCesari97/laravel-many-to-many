@@ -54,7 +54,7 @@
                     <div class="px-3 ">
                         <input {{ $project->technology->contains($technology->id) ? 'checked' : '' }}
                             id="technologies-{{ $technology->id }}" name="technologies[]" type="checkbox"
-                            value="{{ $technology->id }}" class="form-check-input">
+                            value="{{ $technology->id }}" class="form-check-input ">
                         <label class="form-check-label" for="technologies-{{ $technology->id }}">{{ $technology->label }}
                         </label>
                     </div>
@@ -65,7 +65,14 @@
             <div class="col-12">
                 <label class="form-label" for="image">Immagine progetto</label>
 
-                <input class="form-control" id="image" name="image" type="file">
+                <input class="form-control @error('image') is-invalid @enderror" id="image" name="image"
+                    type="file">
+
+                @error('image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+
+                <img src="{{ asset('storage/' . $project->image) }}" alt="">
             </div>
 
 
