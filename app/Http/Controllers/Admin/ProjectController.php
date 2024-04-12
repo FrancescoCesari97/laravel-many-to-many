@@ -162,4 +162,14 @@ class ProjectController extends Controller
         $project->delete();
         return redirect()->route('admin.projects.index') /* ->with('message-class', 'alert-danger ')->with('message', 'progetto eliminato ') */;
     }
+
+    public function deleteImg(Project $project)
+    {
+        Storage::delete($project->image);
+        $project->image = null;
+
+        $project->save();
+
+        return redirect()->back();
+    }
 }

@@ -27,6 +27,8 @@ Route::middleware('auth')
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('projects', ProjectController::class);
+
+        Route::delete('/projects/{project}/delete-img', [ProjectController::class, 'deleteImg'])->name('projects.delete-img');
     });
 
 require __DIR__ . '/auth.php';

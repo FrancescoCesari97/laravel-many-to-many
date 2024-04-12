@@ -72,7 +72,17 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
 
-                <img src="{{ asset('storage/' . $project->image) }}" alt="">
+
+                @if (!empty($project->image) && !empty($project->id))
+                    <div class="preview-image-container">
+                        <div class="delete-button">
+                            <span>x</span>
+                        </div>
+
+                        <img class="img-fluid" src="{{ asset('storage/' . $project->image) }}" alt="">
+                    </div>
+                @endif
+
             </div>
 
 
@@ -91,6 +101,13 @@
         </form>
 
 
+        @if (!empty($project->id))
+            <form class="d-none" method="POST" id="delete-image-form"
+                action="{{ route('admin.projects.delete-img', $project) }}">
+                @method('DELETE')
+                @csrf
+            </form>
+        @endif
     </div>
 @endsection
 
@@ -98,4 +115,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
+
+@section('js')
+    @if (!empty($project->id))
+        <script>
+            const deleteButton = document.querySelector('.delete-button');
+            const deleteImageForm = document.querySelector('#delete-image-form');
+
+            deleteButton.addEventListener('click', () => {
+                deleteImageForm.submit();
+            })
+        </script>
+    @endif
 @endsection
